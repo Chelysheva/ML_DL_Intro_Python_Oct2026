@@ -14,14 +14,44 @@ You are expected to attend two half-day sessions:
 - **Friday, 23rd October**: 10:00 - 13:00
 
 ## Requirements
-- Python 3.8 or above
-- A Python IDE (Spyder, Jupyter, VS Code, or similar)
-- Python packages: `scikit-learn`, `pytorch`, `matplotlib`, `pandas`, `seaborn`, `opencv`, `pillow`
-- If you have conda/mamba installed, the easiest thing is to create a new environment with the provided yaml file:
+
+### Day 1: machine learning
+
+Python 3.10 or newer is recommended. Use Spyder, Jupyter, VS Code or another Python editor.
+
+```bash
+python -m pip install -r requirements_day1.txt
 ```
+
+Keep these files together:
+
+- `ML_Python_day1_classification.py`
+- `breast_cancer_wisconsin_original.csv`
+- `ML_Python_day1_regression.py`
+- `diabetes_regression.csv`
+
+Run the scripts in numbered sections in Spyder, or from a terminal:
+
+```bash
+python ML_Python_day1_classification.py
+python ML_Python_day1_regression.py
+```
+
+With Jupyter, use `%run ML_Python_day1_classification.py` or `%run ML_Python_day1_regression.py`. If pasting individual sections into notebook cells, set the working directory to the folder containing the CSV files.
+
+Figures, cross-validation summaries, held-out predictions and fitted pipelines are saved in `outputs_classification/` and `outputs_regression/`. These folders are generated outputs and do not need to be committed. Figures are also displayed at the end of each script. Only load joblib model files you trust.
+
+Day 1 slides: `Session_1_ML_intro_python_Oct2026.pptx`. Optional backup slides are hidden in slide-show view but remain accessible in the editor. See `DATASETS.md` for provenance and a data dictionary.
+
+### Day 2: deep learning
+
+The separate Day 2 scripts, slides and `deeplearning.yaml` are unchanged. If you have conda/mamba, create the supplied deep-learning environment:
+
+```bash
 conda env create -f deeplearning.yaml
 conda activate deeplearning
 ```
+
 ## Course Objectives
 
 By the end of this course, you will learn:
@@ -44,10 +74,10 @@ The course is structured into two half-day sessions as follows:
 - Feature Selection Algorithms
 
 **Hands-on 1:**
-- Application of machine learning in Python using the `sklearn` library on a publicly available clinical dataset (solving a classification problem).
+- Application of machine learning in Python using the `sklearn` library on the Wisconsin Breast Cancer Original dataset (classification, with repeated sample IDs kept together during validation).
 
 **Hands-on 2:**
-- Application of feature selection and machine learning in Python using the `sklearn` library on a publicly available socio-demographical medical dataset (solving a regression problem).
+- Application of feature selection and machine learning in Python using the `sklearn` library on the diabetes progression dataset (regression: ten baseline predictors and a progression score at one year).
 
 ### Day 2
 
@@ -66,3 +96,16 @@ The course is structured into two half-day sessions as follows:
 - Application of CNNs on an image classification problem (Acute Lymphoblastic Leukemia classification).
 - Model Evaluation
 - Using Pre-trained Models
+
+## Day 1 validation workflow
+
+Both practicals use complete scikit-learn pipelines: median imputation, standardisation, optional feature selection and an estimator. Preprocessing is fitted within each training fold. A simple dummy baseline is included.
+
+- Classification: hold out approximately 30% of sample IDs, compare candidates using five-fold stratified grouped CV, and select by mean ROC AUC.
+- Regression: hold out 30% of patients, compare candidates using five-fold shuffled CV, and select by mean RMSE.
+- Refit the selected pipeline on all training data and evaluate on the held-out set.
+- Save the full pipeline, including preprocessing, rather than just the estimator.
+
+The exercises use illustrative model settings rather than an exhaustive tuning search. Changing `K_FEATURES` or other settings should be assessed using training CV. Repeated experiments after looking at the test results are exploratory, not fresh independent tests. The permutation importance plots describe predictive behaviour, not causality; correlated predictors may share importance.
+
+The previous COVID CSV files are no longer used by Day 1 and may be retained as optional historical examples or removed from the repository.
