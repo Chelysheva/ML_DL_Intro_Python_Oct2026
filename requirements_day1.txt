@@ -1,0 +1,8 @@
+# Day 1 ML only. Python 3.10 or newer recommended.
+numpy>=1.23
+pandas>=1.5
+scipy>=1.9
+scikit-learn>=1.2
+matplotlib>=3.9
+seaborn>=0.12
+joblib>=1.2
