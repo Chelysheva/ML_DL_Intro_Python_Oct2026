@@ -41,11 +41,11 @@ With Jupyter, use `%run ML_Python_day1_classification.py` or `%run ML_Python_day
 
 Figures, cross-validation summaries, held-out predictions and fitted pipelines are saved in `outputs_classification/` and `outputs_regression/`. These folders are generated outputs and do not need to be committed. Figures are also displayed at the end of each script. Only load joblib model files you trust.
 
-Day 1 slides: `Session_1_ML_intro_python_Oct2026.pptx`. Optional backup slides are hidden in slide-show view but remain accessible in the editor. See `DATASETS.md` for provenance and a data dictionary.
+Day 1 slides: `Session_1_ML_intro_python_Oct2026.pptx`. See `DATASETS.md` for provenance and a data dictionary.
 
 ### Day 2: deep learning
 
-The separate Day 2 scripts, slides and `deeplearning.yaml` are unchanged. If you have conda/mamba, create the supplied deep-learning environment:
+The separate Day 2 scripts, slides and `deeplearning.yaml`. If you have conda/mamba, create the supplied deep-learning environment:
 
 ```bash
 conda env create -f deeplearning.yaml
